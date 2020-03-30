@@ -3,9 +3,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'bling/vim-airline'
-Plug 'avakhov/vim-yaml'
-Plug 'preservim/nerdtree'
-Plug 'stephpy/vim-yaml'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-fugitive'
 Plug 'cloudhead/neovim-fuzzy'
@@ -13,17 +10,42 @@ Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'pearofducks/ansible-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'mattn/emmet-vim'
+Plug 'stephpy/vim-yaml'
+Plug 'preservim/nerdtree'
+
 
 call plug#end()
 
+nnoremap <leader>d "_d
+xnoremap <leader>d "_d
 
-
+"set completeopt+=fuzzy
 "vim-go settings
 map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
+"autocmd FileType go nmap <leader>r  <Plug>(go-run) 
+let g:go_fmt_command = "goimports"
+
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+
+
+
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -32,8 +54,9 @@ nmap <C-n> :bn<CR>
 nnoremap <C-p> :FuzzyOpen<CR>
 "imap <F5> <Esc>:w<CR>:!clear;python %<CR>
 nnoremap <buffer> <F9> :!python %<cr>
+nmap <C-r> :GoRun %<CR>
 
-au FileType go nmap <C-r> <Plug>(go-run)
+"au FileType go nmap <C-r> <Plug>(go-run)
 tnoremap <Esc> <C-\><C-n>
 
 "go hightlights if they work
@@ -43,6 +66,9 @@ let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+
+"coc hightlights
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " -------------------------------------------------------------------------------------------------
 " coc.nvim default settings
@@ -115,3 +141,5 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC]
 let g:go_def_mapping_enabled = 0
+
+
